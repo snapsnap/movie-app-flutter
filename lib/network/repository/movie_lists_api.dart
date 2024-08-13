@@ -13,10 +13,55 @@ class MovieListsApi {
   }) async {
     final params = {
       "language": language ?? "en-US",
-      "page": language ?? 1,
+      "page": page ?? 1,
     };
     final response = await apiClient.getData(
       url: "/3/movie/now_playing",
+      queryParameters: params,
+    );
+    return NowPlayingModel.fromJson(response);
+  }
+
+  Future<NowPlayingModel> getPopularMovies({
+    String? language,
+    int? page,
+  }) async {
+    final params = {
+      "language": language ?? "en-US",
+      "page": page ?? 1,
+    };
+    final response = await apiClient.getData(
+      url: "/3/movie/popular",
+      queryParameters: params,
+    );
+    return NowPlayingModel.fromJson(response);
+  }
+
+  Future<NowPlayingModel> getTopRatedMovies({
+    String? language,
+    int? page,
+  }) async {
+    final params = {
+      "language": language ?? "en-US",
+      "page": page ?? 1,
+    };
+    final response = await apiClient.getData(
+      url: "/3/movie/top_rated",
+      queryParameters: params,
+    );
+    return NowPlayingModel.fromJson(response);
+  }
+
+  Future<NowPlayingModel> getUpcomingMovies({
+    String? language,
+    int? page,
+  }) async {
+    final params = {
+      "language": language ?? "en-US",
+      "page": page ?? 1,
+    };
+    final response = await apiClient.getData(
+      url: "/3/movie/upcoming",
       queryParameters: params,
     );
     return NowPlayingModel.fromJson(response);

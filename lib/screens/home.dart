@@ -20,6 +20,9 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         Provider.of<MovieProvider>(context, listen: false).getNowPlayingList();
+        Provider.of<MovieProvider>(context, listen: false).getPopularList();
+        Provider.of<MovieProvider>(context, listen: false).getTopRatedList();
+        Provider.of<MovieProvider>(context, listen: false).getUpcomingList();
       },
     );
   }
@@ -112,14 +115,14 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(left: 10),
                   controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: movieProvider.nowPlayingList.length,
+                  itemCount: movieProvider.popularList.length,
                   itemBuilder: (context, index) {
                     return CardMovie(
                       image:
-                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
-                      title: "${movieProvider.nowPlayingList[index].title}",
-                      rating: movieProvider.nowPlayingList[index].voteAverage!,
-                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          "$assetURL${movieProvider.popularList[index].posterPath}",
+                      title: "${movieProvider.popularList[index].title}",
+                      rating: movieProvider.popularList[index].voteAverage!,
+                      year: movieProvider.popularList[index].releaseDate!
                           .split("-")
                           .first,
                     );
@@ -140,14 +143,14 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(left: 10),
                   controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: movieProvider.nowPlayingList.length,
+                  itemCount: movieProvider.topRatedList.length,
                   itemBuilder: (context, index) {
                     return CardMovie(
                       image:
-                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
-                      title: "${movieProvider.nowPlayingList[index].title}",
-                      rating: movieProvider.nowPlayingList[index].voteAverage!,
-                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          "$assetURL${movieProvider.topRatedList[index].posterPath}",
+                      title: "${movieProvider.topRatedList[index].title}",
+                      rating: movieProvider.topRatedList[index].voteAverage!,
+                      year: movieProvider.topRatedList[index].releaseDate!
                           .split("-")
                           .first,
                     );
@@ -168,14 +171,14 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(left: 10),
                   controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: movieProvider.nowPlayingList.length,
+                  itemCount: movieProvider.upcomingList.length,
                   itemBuilder: (context, index) {
                     return CardMovie(
                       image:
-                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
-                      title: "${movieProvider.nowPlayingList[index].title}",
-                      rating: movieProvider.nowPlayingList[index].voteAverage!,
-                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          "$assetURL${movieProvider.upcomingList[index].posterPath}",
+                      title: "${movieProvider.upcomingList[index].title}",
+                      rating: movieProvider.upcomingList[index].voteAverage!,
+                      year: movieProvider.upcomingList[index].releaseDate!
                           .split("-")
                           .first,
                     );

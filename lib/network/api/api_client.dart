@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../utils/config.dart';
@@ -17,14 +18,26 @@ class ApiClient {
         "accept": "application/json",
         "Authorization": "Bearer $apiReadAccessToken",
       };
+      final queryParams = queryParameters!.map(
+        (key, value) => MapEntry(key, value.toString()),
+      );
+      final uri = Uri(
+        scheme: 'https',
+        host: baseURL,
+        path: url,
+        queryParameters: queryParams,
+      );
       final response = await http
-          .get(Uri.http(baseURL, url, queryParameters), headers: headerApi)
+          .get(uri, headers: headerApi)
           .timeout(const Duration(seconds: timeOutRequest));
+      debugPrint("res: ${response.statusCode}");
 
       responseJson = customResponseStatus(response);
     } on SocketException {
+      debugPrint("no internet");
       throw FetchDataException("No Internet Connection");
     } on TimeoutException {
+      debugPrint("timeout");
       throw FetchDataException("Request Timeout");
     }
 
