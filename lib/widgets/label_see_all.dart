@@ -12,10 +12,18 @@ class LabelSeeAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 5,
+      ),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 249, 231),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: Colors.amber,
+        ),
       ),
       child: Row(
         children: [

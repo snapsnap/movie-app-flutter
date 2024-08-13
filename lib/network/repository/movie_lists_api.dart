@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:movie_app/network/api/api_client.dart';
 
+import '../models/mdl_detail_movie.dart';
 import '../models/mdl_now_playing.dart';
 
 class MovieListsApi {
@@ -65,6 +66,22 @@ class MovieListsApi {
       queryParameters: params,
     );
     return NowPlayingModel.fromJson(response);
+  }
+
+  Future<DetailMovieModel> getDetailMovieById({
+    required String movieId,
+    String? language,
+    String? appendToResponse,
+  }) async {
+    final params = {
+      "language": language ?? "en-US",
+      "append_to_response": appendToResponse ?? "",
+    };
+    final response = await apiClient.getData(
+      url: "/3/movie/$movieId",
+      queryParameters: params,
+    );
+    return DetailMovieModel.fromJson(response);
   }
 
   // Future getNoHp(String user, String pass) async {
