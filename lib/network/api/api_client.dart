@@ -6,7 +6,10 @@ import '../../utils/config.dart';
 import 'custom_exception.dart';
 
 class ApiClient {
-  Future<dynamic> getData(String url) async {
+  Future<dynamic> getData({
+    required String url,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     dynamic responseJson;
 
     try {
@@ -15,7 +18,7 @@ class ApiClient {
         "Authorization": "Bearer $apiReadAccessToken",
       };
       final response = await http
-          .get(Uri.parse(baseURL + url), headers: headerApi)
+          .get(Uri.http(baseURL, url, queryParameters), headers: headerApi)
           .timeout(const Duration(seconds: timeOutRequest));
 
       responseJson = customResponseStatus(response);
@@ -28,7 +31,7 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> postData(String url, Object? body) async {
+  Future<dynamic> postData({required String url, Object? body}) async {
     dynamic responseJson;
 
     try {

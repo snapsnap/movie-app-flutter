@@ -7,8 +7,18 @@ import '../models/mdl_now_playing.dart';
 class MovieListsApi {
   final apiClient = ApiClient();
 
-  Future getNowPlayingMovies() async {
-    final response = await apiClient.getData("/3/movie/now_playing");
+  Future<NowPlayingModel> getNowPlayingMovies({
+    String? language,
+    int? page,
+  }) async {
+    final params = {
+      "language": language ?? "en-US",
+      "page": language ?? 1,
+    };
+    final response = await apiClient.getData(
+      url: "/3/movie/now_playing",
+      queryParameters: params,
+    );
     return NowPlayingModel.fromJson(response);
   }
 

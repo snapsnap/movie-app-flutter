@@ -3,8 +3,26 @@ import 'package:movie_app/providers/movie_provider.dart';
 import 'package:movie_app/utils/config.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+import '../widgets/card_movie.dart';
+import '../widgets/label_see_all.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        Provider.of<MovieProvider>(context, listen: false).getNowPlayingList();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,85 +72,114 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        "Now Playing",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      child: const Align(
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          children: [
-                            Text(
-                              "See all",
-                              style: TextStyle(
-                                letterSpacing: 0,
-                              ),
-                              textAlign: TextAlign.right,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              applyTextScaling: true,
-                              size: 15,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              child: LabelSeeAll(
+                label: "Now Playing",
+                onTap: () {},
               ),
             ),
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 200,
+                height: 250,
                 child: ListView.builder(
                   padding: const EdgeInsets.only(left: 10),
                   controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
+                  itemCount: movieProvider.nowPlayingList.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 100,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Text(
-                              "Judul film",
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
+                    return CardMovie(
+                      image:
+                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
+                      title: "${movieProvider.nowPlayingList[index].title}",
+                      rating: movieProvider.nowPlayingList[index].voteAverage!,
+                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          .split("-")
+                          .first,
                     );
                   },
-                  itemCount: 10,
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: LabelSeeAll(
+                label: "Popular",
+                onTap: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 10),
+                  controller: ScrollController(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movieProvider.nowPlayingList.length,
+                  itemBuilder: (context, index) {
+                    return CardMovie(
+                      image:
+                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
+                      title: "${movieProvider.nowPlayingList[index].title}",
+                      rating: movieProvider.nowPlayingList[index].voteAverage!,
+                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          .split("-")
+                          .first,
+                    );
+                  },
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: LabelSeeAll(
+                label: "Top Rated",
+                onTap: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 10),
+                  controller: ScrollController(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movieProvider.nowPlayingList.length,
+                  itemBuilder: (context, index) {
+                    return CardMovie(
+                      image:
+                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
+                      title: "${movieProvider.nowPlayingList[index].title}",
+                      rating: movieProvider.nowPlayingList[index].voteAverage!,
+                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          .split("-")
+                          .first,
+                    );
+                  },
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: LabelSeeAll(
+                label: "Upcoming",
+                onTap: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 10),
+                  controller: ScrollController(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movieProvider.nowPlayingList.length,
+                  itemBuilder: (context, index) {
+                    return CardMovie(
+                      image:
+                          "$assetURL${movieProvider.nowPlayingList[index].posterPath}",
+                      title: "${movieProvider.nowPlayingList[index].title}",
+                      rating: movieProvider.nowPlayingList[index].voteAverage!,
+                      year: movieProvider.nowPlayingList[index].releaseDate!
+                          .split("-")
+                          .first,
+                    );
+                  },
                 ),
               ),
             ),

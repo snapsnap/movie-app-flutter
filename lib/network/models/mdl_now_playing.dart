@@ -1,7 +1,7 @@
 class NowPlayingModel {
   Dates? dates;
   int? page;
-  List<Results>? results;
+  List<ResultsNp>? results;
   int? totalPages;
   int? totalResults;
 
@@ -16,9 +16,9 @@ class NowPlayingModel {
     dates = json['dates'] != null ? Dates.fromJson(json['dates']) : null;
     page = json['page'];
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <ResultsNp>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results!.add(ResultsNp.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -59,7 +59,7 @@ class Dates {
   }
 }
 
-class Results {
+class ResultsNp {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -75,7 +75,7 @@ class Results {
   double? voteAverage;
   int? voteCount;
 
-  Results(
+  ResultsNp(
       {this.adult,
       this.backdropPath,
       this.genreIds,
@@ -91,7 +91,7 @@ class Results {
       this.voteAverage,
       this.voteCount});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  ResultsNp.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
