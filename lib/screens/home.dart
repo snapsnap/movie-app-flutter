@@ -35,14 +35,14 @@ class _HomePageState extends State<HomePage> {
     final movieProvider = Provider.of<MovieProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
               pinned: true,
               flexibleSpace: Container(
-                color: Colors.white,
+                color: Colors.black,
                 alignment: Alignment.center,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                       height: 30,
                       width: 30,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: Colors.grey,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: const Icon(

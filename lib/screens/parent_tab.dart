@@ -35,11 +35,11 @@ class _ParentTabState extends State<ParentTab>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: pageList[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         currentIndex: selectedIndex,
         onTap: (value) {
           setState(() {

@@ -24,7 +24,7 @@ class CardMovie extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        color: Colors.white,
+        // color: Colors.white,
         child: SizedBox(
           width: 100,
           height: 250,

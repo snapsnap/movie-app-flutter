@@ -19,7 +19,7 @@ class LabelSeeAll extends StatelessWidget {
         vertical: 5,
       ),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 249, 231),
+        // color: const Color.fromARGB(255, 255, 249, 231),
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
           color: Colors.amber,
