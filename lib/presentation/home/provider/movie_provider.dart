@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/params/now_playing_params.dart';
-import 'package:movie_app/domain/entities/detail_movie_entity.dart';
 import 'package:movie_app/domain/entities/now_playing_entity.dart';
-import 'package:movie_app/domain/usecases/movie/get_detail_movie.dart';
 
-import '../../../core/params/detail_movie_params.dart';
 import '../../../domain/usecases/movie/get_now_playing_movies.dart';
 import '../../../domain/usecases/movie/get_popular_movies.dart';
 import '../../../domain/usecases/movie/get_top_rated_movies.dart';
@@ -18,17 +15,13 @@ enum TopRatedStatus { initial, loading, success, error }
 
 enum UpcomingStatus { initial, loading, success, error }
 
-enum DetailMovieStatus { initial, loading, success, error }
-
 class MovieProvider extends ChangeNotifier {
-  final GetDetailMovieUseCase getDetailMovieUseCase;
   final GetNowPlayingMoviesUseCase getNowPlayingMoviesUseCase;
   final GetPopularMoviesUseCase getPopularMoviesUseCase;
   final GetTopRatedMoviesUseCase getTopRatedMoviesUseCase;
   final GetUpcomingMoviesUseCase getUpcomingMoviesUseCase;
 
   MovieProvider({
-    required this.getDetailMovieUseCase,
     required this.getNowPlayingMoviesUseCase,
     required this.getPopularMoviesUseCase,
     required this.getTopRatedMoviesUseCase,
@@ -39,7 +32,6 @@ class MovieProvider extends ChangeNotifier {
   PopularStatus popularStatus = PopularStatus.initial;
   TopRatedStatus topRatedStatus = TopRatedStatus.initial;
   UpcomingStatus upcomingStatus = UpcomingStatus.initial;
-  DetailMovieStatus detailMovieStatus = DetailMovieStatus.initial;
 
   String errorMessage = "";
 
@@ -47,13 +39,11 @@ class MovieProvider extends ChangeNotifier {
   var _popularList = <ResultsNpEntity>[];
   var _topRatedList = <ResultsNpEntity>[];
   var _upcomingList = <ResultsNpEntity>[];
-  var _detailMovie = DetailMovieEntity();
 
   List<ResultsNpEntity> get nowPlayingList => _nowPlayingList;
   List<ResultsNpEntity> get popularList => _popularList;
   List<ResultsNpEntity> get topRatedList => _topRatedList;
   List<ResultsNpEntity> get upcomingList => _upcomingList;
-  DetailMovieEntity get detailMovie => _detailMovie;
 
   Future<void> getNowPlayingList() async {
     nowPlayingStatus = NowPlayingStatus.loading;
@@ -112,23 +102,6 @@ class MovieProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       upcomingStatus = UpcomingStatus.error;
-      notifyListeners();
-    }
-  }
-
-  Future<void> getDetailMovie({required String movieId}) async {
-    detailMovieStatus = DetailMovieStatus.loading;
-    notifyListeners();
-    try {
-      final params = DetailMovieParams(
-        movieId: movieId,
-      );
-      final result = await getDetailMovieUseCase.call(params);
-      detailMovieStatus = DetailMovieStatus.success;
-      _detailMovie = result;
-      notifyListeners();
-    } catch (e) {
-      detailMovieStatus = DetailMovieStatus.error;
       notifyListeners();
     }
   }

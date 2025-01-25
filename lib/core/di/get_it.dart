@@ -10,6 +10,7 @@ import 'package:movie_app/presentation/home/provider/movie_provider.dart';
 
 import '../../data/repositories/home_repo_impl.dart';
 import '../../domain/repositories/home_repo.dart';
+import '../../presentation/movie_detail/provider/detail_movie_provider.dart';
 import '../config/env.dart';
 
 var getIt = GetIt.instance;
@@ -44,9 +45,12 @@ void registerUseCases() async {
 
 void registerProviders() async {
   getIt.registerSingleton(MovieProvider(
-      getDetailMovieUseCase: getIt(),
       getNowPlayingMoviesUseCase: getIt(),
       getPopularMoviesUseCase: getIt(),
       getTopRatedMoviesUseCase: getIt(),
       getUpcomingMoviesUseCase: getIt()));
+
+  getIt.registerSingleton(DetailMovieProvider(
+    getDetailMovieUseCase: getIt(),
+  ));
 }
