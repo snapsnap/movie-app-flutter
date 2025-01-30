@@ -1,6 +1,6 @@
 import 'package:movie_app/domain/repositories/home_repo.dart';
 
-import '../../../core/params/now_playing_params.dart';
+import '../../../core/common/params/now_playing_params.dart';
 import '../../../core/usecase/param_usecase.dart';
 import '../../entities/now_playing_entity.dart';
 

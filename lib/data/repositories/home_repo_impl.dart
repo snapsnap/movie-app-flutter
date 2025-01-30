@@ -1,8 +1,8 @@
-import 'package:movie_app/core/params/now_playing_params.dart';
+import 'package:movie_app/core/common/params/now_playing_params.dart';
 
 import 'package:movie_app/domain/entities/now_playing_entity.dart';
 
-import '../../core/params/detail_movie_params.dart';
+import '../../core/common/params/detail_movie_params.dart';
 import '../../domain/entities/detail_movie_entity.dart';
 import '../../domain/repositories/home_repo.dart';
 import '../datasources/remote/home_rds.dart';

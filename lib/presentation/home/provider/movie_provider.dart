@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/params/now_playing_params.dart';
+import 'package:movie_app/core/common/params/now_playing_params.dart';
 import 'package:movie_app/domain/entities/now_playing_entity.dart';
 
 import '../../../domain/usecases/movie/get_now_playing_movies.dart';

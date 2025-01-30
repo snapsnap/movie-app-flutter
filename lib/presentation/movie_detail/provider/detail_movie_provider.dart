@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/params/detail_movie_params.dart';
+import '../../../core/common/params/detail_movie_params.dart';
 import '../../../domain/entities/detail_movie_entity.dart';
 import '../../../domain/usecases/movie/get_detail_movie.dart';
 

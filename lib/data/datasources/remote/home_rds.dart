@@ -1,8 +1,8 @@
 import 'package:movie_app/core/network/api_client.dart';
 import 'package:movie_app/data/models/mdl_now_playing.dart';
 
-import '../../../core/params/detail_movie_params.dart';
-import '../../../core/params/now_playing_params.dart';
+import '../../../core/common/params/detail_movie_params.dart';
+import '../../../core/common/params/now_playing_params.dart';
 import '../../models/mdl_detail_movie.dart';
 
 abstract interface class HomeRds {

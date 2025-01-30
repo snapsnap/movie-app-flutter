@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app/core/di/get_it.dart';
+import 'package:movie_app/core/utils/custom_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/config/env.dart';
@@ -69,9 +70,7 @@ class _DetailMovieState extends State<DetailMovie> {
                               child: Text("No Image Available"));
                         },
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      10.spacing,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -104,9 +103,7 @@ class _DetailMovieState extends State<DetailMovie> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            10.spacing,
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,10 +119,7 @@ class _DetailMovieState extends State<DetailMovie> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 5,
-                                      vertical: 1,
-                                    ),
+                                    padding: [1, 5].es,
                                     child: Row(
                                       children: [
                                         Text(
@@ -137,9 +131,7 @@ class _DetailMovieState extends State<DetailMovie> {
                                             letterSpacing: 0,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
+                                        5.spacing,
                                         RatingBar.builder(
                                           ignoreGestures: true,
                                           initialRating:
@@ -158,9 +150,7 @@ class _DetailMovieState extends State<DetailMovie> {
                                           },
                                           onRatingUpdate: (rating) {},
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
+                                        5.spacing,
                                         Text(
                                           "( ${CustomFunctions().formatOneDecimal(double.parse(data.voteCount!.toString()))} )",
                                           style: const TextStyle(
@@ -190,18 +180,14 @@ class _DetailMovieState extends State<DetailMovie> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      10.spacing,
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: 10.horizontal,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(data.overview.toString()),
-                            const SizedBox(
-                              height: 8,
-                            ),
+                            8.spacing,
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
