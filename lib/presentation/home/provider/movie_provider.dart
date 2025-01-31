@@ -26,7 +26,9 @@ class MovieProvider extends ChangeNotifier {
     required this.getPopularMoviesUseCase,
     required this.getTopRatedMoviesUseCase,
     required this.getUpcomingMoviesUseCase,
-  });
+  }) {
+    _initialize();
+  }
 
   NowPlayingStatus nowPlayingStatus = NowPlayingStatus.initial;
   PopularStatus popularStatus = PopularStatus.initial;
@@ -44,6 +46,17 @@ class MovieProvider extends ChangeNotifier {
   List<ResultsNpEntity> get popularList => _popularList;
   List<ResultsNpEntity> get topRatedList => _topRatedList;
   List<ResultsNpEntity> get upcomingList => _upcomingList;
+
+  void _initialize() {
+    getNowPlayingList();
+    getPopularList();
+    getTopRatedList();
+    getUpcomingList();
+  }
+
+  Future<void> refreshPage() async {
+    _initialize();
+  }
 
   Future<void> getNowPlayingList() async {
     nowPlayingStatus = NowPlayingStatus.loading;

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/parent/provider/parent_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/di/get_it.dart';
+import '../../home/provider/movie_provider.dart';
 import '../../home/screens/home.dart';
 import '../../setting/screens/setting.dart';
 
@@ -29,7 +31,14 @@ class _ParentTabState extends State<ParentTab>
   }
 
   var pageList = [
-    const HomePage(),
+    ChangeNotifierProvider(
+      create: (_) => MovieProvider(
+          getNowPlayingMoviesUseCase: getIt(),
+          getPopularMoviesUseCase: getIt(),
+          getTopRatedMoviesUseCase: getIt(),
+          getUpcomingMoviesUseCase: getIt()),
+      child: const HomePage(),
+    ),
     const SettingPage(),
   ];
 

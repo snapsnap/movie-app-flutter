@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_app/core/di/get_it.dart';
 import 'package:movie_app/core/utils/custom_extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -9,31 +8,13 @@ import '../../../core/utils/custom_functions.dart';
 import '../../home/widgets/loading.dart';
 import '../provider/detail_movie_provider.dart';
 
-class DetailMovie extends StatefulWidget {
-  final String movieId;
-
-  const DetailMovie({super.key, required this.movieId});
-
-  @override
-  State<DetailMovie> createState() => _DetailMovieState();
-}
-
-class _DetailMovieState extends State<DetailMovie> {
-  late DetailMovieProvider detailMovieProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    detailMovieProvider = getIt<DetailMovieProvider>();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        detailMovieProvider.getDetailMovie(movieId: widget.movieId);
-      },
-    );
-  }
+class DetailMovie extends StatelessWidget {
+  const DetailMovie({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final detailMovieProvider = Provider.of<DetailMovieProvider>(context);
+
     return ChangeNotifierProvider.value(
       value: detailMovieProvider,
       child: Scaffold(
@@ -72,7 +53,7 @@ class _DetailMovieState extends State<DetailMovie> {
                       ),
                       10.spacing,
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: 10.horizontal,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -81,10 +62,10 @@ class _DetailMovieState extends State<DetailMovie> {
                               height: 150,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: 5.brc,
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: 5.brc,
                                 child: Image.network(
                                   "${Env.assetURL}${data.posterPath}",
                                   loadingBuilder:
@@ -128,7 +109,6 @@ class _DetailMovieState extends State<DetailMovie> {
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold,
-                                            letterSpacing: 0,
                                           ),
                                         ),
                                         5.spacing,
@@ -168,7 +148,7 @@ class _DetailMovieState extends State<DetailMovie> {
                                     children: genres.map(
                                       (genre) {
                                         return Chip(
-                                          padding: const EdgeInsets.all(1),
+                                          padding: 1.ea,
                                           label: Text(genre.name ?? "-"),
                                         );
                                       },
@@ -189,10 +169,12 @@ class _DetailMovieState extends State<DetailMovie> {
                             Text(data.overview.toString()),
                             8.spacing,
                             Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: 10.ea,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white10,
+                                borderRadius: 10.brc,
+                                // color: Colors.white10,
+                                border: Border.all(
+                                    color: Colors.grey.withOpacity(0.3)),
                               ),
                               child: Center(
                                 child: Text(

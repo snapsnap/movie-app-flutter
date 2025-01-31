@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_app/core/utils/custom_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/config/env.dart';
 import '../provider/movie_provider.dart';
 import 'card_movie.dart';
-import 'loading.dart';
 
 class PopularListWidget extends StatelessWidget {
   const PopularListWidget({super.key});
@@ -14,11 +14,9 @@ class PopularListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MovieProvider>(
       builder: (context, movieProvider, child) {
-        if (movieProvider.popularStatus == PopularStatus.loading) {
-          return const Loading();
-        } else if (movieProvider.popularList.isEmpty) {
-          return const Center(child: Text("No popular movies"));
-        }
+        final isShimmering =
+            movieProvider.popularStatus == PopularStatus.loading ||
+                movieProvider.popularStatus == PopularStatus.initial;
 
         return SizedBox(
           height: 250,
@@ -26,8 +24,22 @@ class PopularListWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             controller: ScrollController(),
             scrollDirection: Axis.horizontal,
-            itemCount: movieProvider.popularList.length,
+            itemCount: isShimmering ? 5 : movieProvider.popularList.length,
             itemBuilder: (context, index) {
+              // Jika sedang shimmering, tampilkan skeleton loading
+              if (isShimmering) {
+                return const CardMovie(
+                  image: "",
+                  title: "Loading...",
+                  rating: 0,
+                  year: "----",
+                ).shimmer(isEnabled: true);
+              }
+
+              // Pastikan list tidak kosong sebelum mengakses index
+              if (movieProvider.popularList.isEmpty) {
+                return const Center(child: Text("No popular movies"));
+              }
               final data = movieProvider.popularList[index];
 
               return CardMovie(

@@ -161,7 +161,7 @@ extension WidgetX on Widget {
         visible: isVisible,
         child: this,
       );
-  Widget shimmer(bool isEnabled) => Shimmer.fromColors(
+  Widget shimmer({required bool isEnabled}) => Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,
         enabled: isEnabled,
@@ -169,11 +169,14 @@ extension WidgetX on Widget {
       );
 
   /// Adds a tap gesture to the widget
-  Widget onTap(Function()? onTap, {bool isDoubleTap = false}) {
-    return GestureDetector(
-      onTap: isDoubleTap ? null : onTap,
-      onDoubleTap: isDoubleTap ? onTap : null,
-      child: this,
+  Widget onTap(void Function(BuildContext context)? onTap,
+      {bool isDoubleTap = false}) {
+    return Builder(
+      builder: (context) => GestureDetector(
+        onTap: isDoubleTap ? null : () => onTap?.call(context),
+        onDoubleTap: isDoubleTap ? () => onTap?.call(context) : null,
+        child: this,
+      ),
     );
   }
 

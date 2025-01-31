@@ -6,11 +6,9 @@ import 'package:movie_app/domain/usecases/movie/get_now_playing_movies.dart';
 import 'package:movie_app/domain/usecases/movie/get_popular_movies.dart';
 import 'package:movie_app/domain/usecases/movie/get_top_rated_movies.dart';
 import 'package:movie_app/domain/usecases/movie/get_upcoming_movies.dart';
-import 'package:movie_app/presentation/home/provider/movie_provider.dart';
 
 import '../../data/repositories/home_repo_impl.dart';
 import '../../domain/repositories/home_repo.dart';
-import '../../presentation/movie_detail/provider/detail_movie_provider.dart';
 import '../common/services/storage_service.dart';
 import '../config/env.dart';
 
@@ -22,7 +20,7 @@ Future<void> setup() async {
   registerDataSources();
   registerRepositories();
   registerUseCases();
-  registerProviders();
+  // registerProviders();
 }
 
 void registerServices() async {
@@ -49,14 +47,14 @@ void registerUseCases() async {
   getIt.registerSingleton(GetUpcomingMoviesUseCase(getIt()));
 }
 
-void registerProviders() async {
-  getIt.registerSingleton(MovieProvider(
-      getNowPlayingMoviesUseCase: getIt(),
-      getPopularMoviesUseCase: getIt(),
-      getTopRatedMoviesUseCase: getIt(),
-      getUpcomingMoviesUseCase: getIt()));
+// void registerProviders() async {
+//   getIt.registerSingleton(MovieProvider(
+//       getNowPlayingMoviesUseCase: getIt(),
+//       getPopularMoviesUseCase: getIt(),
+//       getTopRatedMoviesUseCase: getIt(),
+//       getUpcomingMoviesUseCase: getIt()));
 
-  getIt.registerSingleton(DetailMovieProvider(
-    getDetailMovieUseCase: getIt(),
-  ));
-}
+//   getIt.registerSingleton(DetailMovieProvider(
+//     getDetailMovieUseCase: getIt(),
+//   ));
+// }

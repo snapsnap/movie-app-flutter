@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_app/core/utils/custom_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/config/env.dart';
 import '../provider/movie_provider.dart';
 import 'card_movie.dart';
-import 'loading.dart';
 
 class TopRatedListWidget extends StatelessWidget {
   const TopRatedListWidget({super.key});
@@ -14,11 +14,9 @@ class TopRatedListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MovieProvider>(
       builder: (context, movieProvider, child) {
-        if (movieProvider.topRatedStatus == TopRatedStatus.loading) {
-          return const Loading();
-        } else if (movieProvider.topRatedList.isEmpty) {
-          return const Center(child: Text("No top rated movies"));
-        }
+        final isShimmering =
+            movieProvider.topRatedStatus == TopRatedStatus.loading ||
+                movieProvider.topRatedStatus == TopRatedStatus.initial;
 
         return SizedBox(
           height: 250,
@@ -26,8 +24,22 @@ class TopRatedListWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             controller: ScrollController(),
             scrollDirection: Axis.horizontal,
-            itemCount: movieProvider.topRatedList.length,
+            itemCount: isShimmering ? 5 : movieProvider.topRatedList.length,
             itemBuilder: (context, index) {
+              // Jika sedang shimmering, tampilkan skeleton loading
+              if (isShimmering) {
+                return const CardMovie(
+                  image: "",
+                  title: "Loading...",
+                  rating: 0,
+                  year: "----",
+                ).shimmer(isEnabled: true);
+              }
+
+              // Pastikan list tidak kosong sebelum mengakses index
+              if (movieProvider.topRatedList.isEmpty) {
+                return const Center(child: Text("No top rated movies"));
+              }
               final data = movieProvider.topRatedList[index];
 
               return CardMovie(

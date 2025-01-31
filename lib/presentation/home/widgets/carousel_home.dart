@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movie_app/core/utils/custom_extensions.dart';
 
 import '../../../core/utils/custom_functions.dart';
 
@@ -20,18 +21,22 @@ class CarouselHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: 5.ea,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: NetworkImage(
-                  image,
-                ),
+              borderRadius: 10.brc,
+            ),
+            child: ClipRRect(
+              borderRadius: 10.brc,
+              child: Image.network(
+                image,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container();
+                },
               ),
             ),
           ),
@@ -39,16 +44,13 @@ class CarouselHome extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
-                ),
+                padding: 10.ea,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.black38,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: 10.rc,
+                    bottomRight: 10.rc,
                   ),
                 ),
                 child: Column(
@@ -73,12 +75,9 @@ class CarouselHome extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 0,
                           ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        5.spacing,
                         Expanded(
                           child: RatingBar.builder(
                             ignoreGestures: true,
@@ -107,14 +106,11 @@ class CarouselHome extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 0,
                       ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    10.spacing,
                   ],
                 ),
               ),

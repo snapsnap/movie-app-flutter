@@ -3,42 +3,21 @@ import 'package:movie_app/core/config/theme/colors.dart';
 import 'package:movie_app/presentation/home/provider/movie_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/di/get_it.dart';
 import '../widgets/carousel_list.dart';
 import '../widgets/label_see_all.dart';
 import '../widgets/popular_list.dart';
 import '../widgets/top_rated_list.dart';
 import '../widgets/upcoming_list.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late final MovieProvider movieProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    movieProvider = getIt<MovieProvider>();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        movieProvider
-          ..getNowPlayingList()
-          ..getPopularList()
-          ..getTopRatedList()
-          ..getUpcomingList();
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: movieProvider,
+    final movieProvider = Provider.of<MovieProvider>(context);
+
+    return RefreshIndicator.adaptive(
+      onRefresh: () => movieProvider.refreshPage(),
       child: Scaffold(
         // backgroundColor: Colors.white,
         body: SafeArea(
@@ -89,7 +68,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SliverToBoxAdapter(
                 child: LabelSeeAll(
-                  label: "Upcoming",
+                  label: "Upcoming Movies",
                   onTap: () {},
                 ),
               ),
@@ -98,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SliverToBoxAdapter(
                 child: LabelSeeAll(
-                  label: "Popular",
+                  label: "Popular Movies",
                   onTap: () {},
                 ),
               ),
@@ -107,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SliverToBoxAdapter(
                 child: LabelSeeAll(
-                  label: "Top Rated",
+                  label: "Top Rated Movies",
                   onTap: () {},
                 ),
               ),

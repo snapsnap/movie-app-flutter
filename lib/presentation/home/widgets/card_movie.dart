@@ -43,6 +43,9 @@ class CardMovie extends StatelessWidget {
                   child: Image.network(
                     image,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container();
+                    },
                   ),
                 ),
               ),

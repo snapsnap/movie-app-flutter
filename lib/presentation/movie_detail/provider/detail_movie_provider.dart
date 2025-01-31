@@ -8,10 +8,14 @@ enum DetailMovieStatus { initial, loading, success, error }
 
 class DetailMovieProvider extends ChangeNotifier {
   final GetDetailMovieUseCase getDetailMovieUseCase;
+  final String movieId;
 
   DetailMovieProvider({
     required this.getDetailMovieUseCase,
-  });
+    required this.movieId,
+  }) {
+    _initialize();
+  }
 
   DetailMovieStatus detailMovieStatus = DetailMovieStatus.initial;
 
@@ -19,6 +23,10 @@ class DetailMovieProvider extends ChangeNotifier {
 
   var _detailMovie = DetailMovieEntity();
   DetailMovieEntity get detailMovie => _detailMovie;
+
+  void _initialize() {
+    getDetailMovie(movieId: movieId);
+  }
 
   void resetData() {
     _detailMovie = DetailMovieEntity();
