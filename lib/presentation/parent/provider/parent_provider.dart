@@ -7,5 +7,6 @@ class ParentProvider extends ChangeNotifier {
 
   void setIndex(int value) {
     _selectedIndex = value;
+    notifyListeners();
   }
 }

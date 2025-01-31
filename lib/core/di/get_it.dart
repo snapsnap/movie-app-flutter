@@ -11,16 +11,22 @@ import 'package:movie_app/presentation/home/provider/movie_provider.dart';
 import '../../data/repositories/home_repo_impl.dart';
 import '../../domain/repositories/home_repo.dart';
 import '../../presentation/movie_detail/provider/detail_movie_provider.dart';
+import '../common/services/storage_service.dart';
 import '../config/env.dart';
 
 var getIt = GetIt.instance;
 
 Future<void> setup() async {
+  registerServices();
   registerApiClient();
   registerDataSources();
   registerRepositories();
   registerUseCases();
   registerProviders();
+}
+
+void registerServices() async {
+  getIt.registerSingleton<StorageService>(StorageService());
 }
 
 void registerApiClient() async {

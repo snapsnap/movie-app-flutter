@@ -8,6 +8,7 @@ class ConstStorage {
   static const String rememberPassword = "rememberPassword";
   static const String savedTokenKey = "accessToken";
   static const String savedRefreshTokenKey = "refreshToken";
+  static const String localeKey = "locale";
 
   // COMMON
   static const String sessionRemoved = "sessionRemoved";

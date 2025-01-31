@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/config/theme/colors.dart';
 import 'package:movie_app/presentation/home/provider/movie_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,6 @@ class _HomePageState extends State<HomePage> {
               SliverAppBar(
                 pinned: true,
                 flexibleSpace: Container(
-                  color: Colors.black,
                   alignment: Alignment.center,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,8 +72,8 @@ class _HomePageState extends State<HomePage> {
                         height: 30,
                         width: 30,
                         decoration: BoxDecoration(
-                          color: Colors.grey,
                           borderRadius: BorderRadius.circular(30),
+                          border: Border.all(color: warningColor),
                         ),
                         child: const Icon(
                           Icons.person,

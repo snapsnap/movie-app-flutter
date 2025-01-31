@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/presentation/movie_detail/screens/detail_movie.dart';
 import 'package:movie_app/presentation/parent/screens/parent_tab.dart';
+import 'package:provider/provider.dart';
+
+import '../presentation/parent/provider/parent_provider.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -8,7 +11,10 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const ParentTab(),
+      builder: (context, state) => ChangeNotifierProvider(
+        create: (_) => ParentProvider(),
+        child: const ParentTab(),
+      ),
     ),
     GoRoute(
       path: '/detail/:id',

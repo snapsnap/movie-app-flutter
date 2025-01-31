@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/di/get_it.dart';
 import 'package:movie_app/presentation/parent/provider/parent_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,13 +15,11 @@ class ParentTab extends StatefulWidget {
 class _ParentTabState extends State<ParentTab>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late ParentProvider parentProvider;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    parentProvider = getIt<ParentProvider>();
   }
 
   @override
@@ -38,36 +35,34 @@ class _ParentTabState extends State<ParentTab>
 
   @override
   Widget build(BuildContext context) {
+    final parentProvider = Provider.of<ParentProvider>(context);
     int selectedIndex = parentProvider.getSelectedIndex;
 
-    return ChangeNotifierProvider.value(
-      value: parentProvider,
-      child: Scaffold(
-        body: pageList[selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 8,
-          currentIndex: selectedIndex,
-          onTap: (value) {
-            parentProvider.setIndex(value);
-          },
-          selectedItemColor: Colors.red,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.movie,
-                applyTextScaling: true,
-              ),
-              label: "Movies",
+    return Scaffold(
+      body: pageList[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 8,
+        currentIndex: selectedIndex,
+        onTap: (value) {
+          parentProvider.setIndex(value);
+        },
+        selectedItemColor: Colors.red,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.movie,
+              applyTextScaling: true,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                applyTextScaling: true,
-              ),
-              label: "Setting",
+            label: "Movies",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+              applyTextScaling: true,
             ),
-          ],
-        ),
+            label: "Setting",
+          ),
+        ],
       ),
     );
   }
