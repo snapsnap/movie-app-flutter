@@ -174,7 +174,8 @@ class DetailMovie extends StatelessWidget {
                                 borderRadius: 10.brc,
                                 // color: Colors.white10,
                                 border: Border.all(
-                                    color: Colors.grey.withOpacity(0.3)),
+                                  color: Colors.grey.withValues(alpha: 0.3),
+                                ),
                               ),
                               child: Center(
                                 child: Text(
